@@ -1,6 +1,6 @@
+# wttd
 [![Build Status](https://travis-ci.org/n1lux/wttd.svg?branch=master)](https://travis-ci.org/n1lux/wttd)
 [![Code Health](https://landscape.io/github/n1lux/wttd/master/landscape.svg?style=flat)](https://landscape.io/github/n1lux/wttd/master)
-# Eventex
 
 Projeto de Estudo do curso Welcome to the Django.
 
