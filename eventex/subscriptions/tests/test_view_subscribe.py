@@ -1,5 +1,6 @@
 from django.test import TestCase
 from eventex.subscriptions.forms import SubscriptionForm
+from eventex.subscriptions.models import Subscription
 
 
 class SubscribeGet(TestCase):
@@ -53,8 +54,11 @@ class SubscribePostValid(TestCase):
 
     def test_post(self):
         """Valid POST should redirect to /inscricao/"""
-
         self.assertEqual(302, self.resp.status_code)
+
+    def test_save_subscription(self):
+        self.assertTrue(Subscription.objects.exists())
+
 
 class SubscribePostInvalid(TestCase):
     def setUp(self):
@@ -63,7 +67,7 @@ class SubscribePostInvalid(TestCase):
     def tearDown(self):
         pass
 
-    def test_port(self):
+    def test_post(self):
         """Invalid POST should not redirect"""
 
         self.assertEqual(200, self.resp.status_code)
@@ -78,6 +82,9 @@ class SubscribePostInvalid(TestCase):
     def test_form_has_errors(self):
         form = self.resp.context['form']
         self.assertTrue(form.errors)
+
+    def test_dont_save_subscription(self):
+        self.assertFalse(Subscription.objects.exists())
 
 class SubscribeSuccessMessage(TestCase):
 
