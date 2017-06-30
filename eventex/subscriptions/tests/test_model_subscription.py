@@ -18,3 +18,6 @@ class SubscriptionModelTest(TestCase):
     def test_created_at(self):
         """Subscritption must have an auto created at attr."""
         self.assertIsInstance(self.obj.created_at, datetime)
+
+    def test_str(self):
+        self.assertEqual('Nilo Alexandre', str(self.obj))
