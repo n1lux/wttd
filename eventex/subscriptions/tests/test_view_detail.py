@@ -11,7 +11,7 @@ class SubscriptionDatailGet(TestCase):
             email="nilo@mailinator.com",
             phone="21-25632-896645"
         )
-        self.resp = self.client.get('/inscricao/{}/'.format(self.obj.id))
+        self.resp = self.client.get('/inscricao/{}/'.format(self.obj.uid))
 
     def test_get(self):
         self.assertEqual(200, self.resp.status_code)
