@@ -54,7 +54,8 @@ class SubscribePostValid(TestCase):
 
     def test_post(self):
         """Valid POST should redirect to /inscricao/"""
-        self.assertRedirects(self.resp, '/inscricao/1/')
+        subscription = self.resp.context['subscription']
+        self.assertRedirects(self.resp, '/inscricao/{}/'.format(subscription.id))
 
     def test_save_subscription(self):
         self.assertTrue(Subscription.objects.exists())

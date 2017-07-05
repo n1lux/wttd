@@ -42,7 +42,7 @@ def new(request):
 
 def detail(request, pk):
     try:
-        subscription = Subscription.objects.get(pk=pk)
+        subscription = Subscription.objects.get(id=pk)
     except Subscription.DoesNotExist:
         raise Http404
 
