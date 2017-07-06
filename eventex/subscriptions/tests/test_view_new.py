@@ -1,12 +1,13 @@
 from django.test import TestCase
 from eventex.subscriptions.forms import SubscriptionForm
 from eventex.subscriptions.models import Subscription
+from django.shortcuts import resolve_url as r
 
 
-class SubscribeGet(TestCase):
+class SubscriptionsNewGet(TestCase):
 
     def setUp(self):
-        self.response = self.client.get('/inscricao/')
+        self.response = self.client.get(r('subscriptions:new'))
 
     def tearDown(self):
         pass
@@ -43,11 +44,11 @@ class SubscribeGet(TestCase):
         self.assertIsInstance(form, SubscriptionForm)
 
 
-class SubscribePostValid(TestCase):
+class SubscriptionsNewPost(TestCase):
 
     def setUp(self):
         data = {'name': 'Nilo Alexandre', 'cpf': '12345678901', 'email': 'nilo@alexandre.com', 'phone': '19-98541-1256'}
-        self.resp = self.client.post('/inscricao/', data=data)
+        self.resp = self.client.post(r('subscriptions:new'), data=data)
 
     def tearDown(self):
         pass
@@ -55,15 +56,15 @@ class SubscribePostValid(TestCase):
     def test_post(self):
         """Valid POST should redirect to /inscricao/"""
         subscription = self.resp.context['subscription']
-        self.assertRedirects(self.resp, '/inscricao/{}/'.format(subscription.uid))
+        self.assertRedirects(self.resp, r('subscriptions:detail', subscription.uid))
 
     def test_save_subscription(self):
         self.assertTrue(Subscription.objects.exists())
 
 
-class SubscribePostInvalid(TestCase):
+class SubscriptionsNewPostInvalid(TestCase):
     def setUp(self):
-        self.resp = self.client.post('/inscricao/', data={})
+        self.resp = self.client.post(r('subscriptions:new'), data={})
 
     def tearDown(self):
         pass

@@ -1,11 +1,12 @@
 from django.test import TestCase
 from django.core import mail
+from django.shortcuts import resolve_url as r
 
 
 class TestMailSubscribe(TestCase):
     def setUp(self):
         data = {'name': 'Nilo Alexandre', 'cpf': '12345678901', 'email': 'nilo@alexandre.com', 'phone': '19-98541-1256'}
-        self.client.post('/inscricao/', data=data)
+        self.client.post(r('subscriptions:new'), data=data)
         self.email = mail.outbox[0]
 
     def tearDown(self):
